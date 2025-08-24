@@ -9,7 +9,7 @@ We welcome contributions!
 
 ## Setup locally
 ```bash
-git clone https://github.com/yourname/nuxt-overlay-hub.git
+git clone https://github.com/anthonyfranc/nuxt-overlay-hub.git
 cd nuxt-overlay-hub
 pnpm install
 pnpm dev
