@@ -3,7 +3,6 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/content',
     '@nuxt/ui',
-    // Use the published module name or a local link during dev
     'nuxt-overlay-hub'
   ],
 
