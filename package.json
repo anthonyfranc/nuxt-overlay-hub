@@ -1,0 +1,48 @@
+{
+  "name": "nuxt-overlay-hub",
+  "version": "1.0.0",
+  "description": "Lightweight overlay hub for Nuxt 3 that extends Nuxt UI useOverlay with cross-component and by-name helpers. Optional Plus features via config.",
+  "type": "module",
+  "sideEffects": false,
+  "license": "MIT",
+  "keywords": [
+    "nuxt",
+    "nuxt3",
+    "overlay",
+    "modal",
+    "nuxt-ui",
+    "composables"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/nuxt-overlay-hub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-org/nuxt-overlay-hub/issues"
+  },
+  "homepage": "https://github.com/your-org/nuxt-overlay-hub",
+  "peerDependencies": {
+    "nuxt": "^3.12.0 || ^3.13.0"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/module.d.ts",
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    },
+    "./composables": {
+      "types": "./dist/composables.d.ts",
+      "import": "./dist/composables.mjs",
+      "require": "./dist/composables.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild"
+  },
+  "devDependencies": {
+    "unbuild": "^2.0.0"
+  }
+}
