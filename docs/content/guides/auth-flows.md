@@ -1,17 +1,20 @@
 ---
 title: Guide — Auth Flows
+description: Swap Login → Register, avoid duplicates, and await results.
 ---
 
 # Auth Flows
 
-Close Login then open Register:
-
+## Swap Login → Register
 ```ts
-const { closeLatestOfName, openByName, anyOpen } = useOverlayHub()
+const { openByName, ensureSingleByName, closeLatestOfName } = useOverlayHub()
 
-function startRegister() {
-  // example condition
+function openLogin() {
+  openByName('auth/UserLogin')
+}
+
+function swapLoginToRegister() {
   closeLatestOfName('auth/UserLogin')
-  setTimeout(() => openByName('auth/UserRegister'), 250)
+  setTimeout(() => ensureSingleByName('auth/UserRegister'), 200)
 }
 ```
