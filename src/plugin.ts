@@ -1,24 +1,20 @@
-
 // src/plugin.ts
 import { defineNuxtPlugin } from '#app'
-import { useOverlay } from '#imports'
-import { shallowRef, reactive, type Component } from 'vue'
+import { reactive, shallowRef, type Component } from 'vue'
 import { applyPlus } from './plus-enhancer'
 
-type HubOpts = {
-  strictMode?: boolean
-  closeOnRouteChange?: boolean
-  closeOnEscape?: boolean
-  lockBodyScroll?: boolean
-  devExposeGlobal?: boolean
-  plus?: boolean
+async function getImports(nuxtApp: any) {
+  // Nuxt 3.10+/4 exposes $imports. If not, fall back to dynamic #imports.
+  if (nuxtApp?.$imports) return nuxtApp.$imports
+  return await nuxtApp.runWithContext(() => import('#imports'))
 }
 
-export default defineNuxtPlugin((nuxtApp) => {
+export default defineNuxtPlugin(async (nuxtApp) => {
+  const { useOverlay } = await getImports(nuxtApp)  // ✅ no static import
   const core = useOverlay()
-  const reg = shallowRef(new Map<Component, Set<symbol>>())
 
-  const opts = reactive<Required<HubOpts>>({
+  const reg = shallowRef(new Map<Component, Set<symbol>>())
+  const opts = reactive({
     strictMode: false,
     closeOnRouteChange: false,
     closeOnEscape: false,
@@ -78,7 +74,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   const closeLatestOfName = (n: string, v?: any) => closeLatestOf(resolveComp(n), v)
   const ensureSingleByName = (n: string, p?: any) => ensureSingle(resolveComp(n), p)
 
-  // optional policies
+  // policies
   const router = nuxtApp.$router
   router?.beforeEach?.(() => { if (opts.closeOnRouteChange) core.closeAll() })
   if (process.client && opts.closeOnEscape) {
@@ -106,7 +102,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     opts
   }
 
-  if (opts.plus) applyPlus(hub, nuxtApp)
+  if (opts.plus) await applyPlus(hub, nuxtApp) // ⬅ make applyPlus async
 
   nuxtApp.provide('overlayHub', hub)
   if (hub.opts.devExposeGlobal && process.client) (window as any).__overlayHub = hub

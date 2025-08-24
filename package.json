@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/anthonyfranc/nuxt-overlay-hub",
   "peerDependencies": {
-    "nuxt": "^3.12.0 || ^3.13.0"
+    "nuxt": "^3.12.0 || ^4.0.0"
   },
   "exports": {
     ".": {
@@ -44,5 +44,10 @@
   },
   "devDependencies": {
     "unbuild": "^2.0.0"
+  },
+  "dependencies": {
+    "@nuxt/content": "^3.6.3",
+    "@nuxt/ui": "^3.3.2",
+    "nuxt-overlay-hub": "file:nuxt-overlay-hub-1.0.0.tgz"
   }
 }

@@ -1,8 +1,10 @@
-
 // src/plus-enhancer.ts
 import type { Component } from 'vue'
 
-export function applyPlus(hub: any, nuxtApp: any) {
+export async function applyPlus(hub: any, nuxtApp: any) {
+  const imports = nuxtApp?.$imports || await nuxtApp.runWithContext(() => import('#imports'))
+  const { useState, watchEffect } = imports as any
+
   const app = nuxtApp.vueApp
   const keyed = useState<Map<string, symbol>>('overlay-hub-plus:keys', () => new Map())
 
@@ -71,6 +73,4 @@ export function applyPlus(hub: any, nuxtApp: any) {
     idsOfByName, countOfByName, getLatestIdByName,
     openOnceByName, openOrFocusByName, closeAllExceptLatestByName, waitUntilClosedByName, onChangeByName, closeWhereByName,
   })
-
-  return hub
 }

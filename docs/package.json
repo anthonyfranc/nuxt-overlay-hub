@@ -1,0 +1,19 @@
+{
+  "name": "overlay-hub-docs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nuxi dev",
+    "build": "nuxi build",
+    "preview": "nuxi preview"
+  },
+  "devDependencies": {
+    "nuxt": "^4.0.0"
+  },
+  "dependencies": {
+    "@nuxt/content": "^3.0.0",
+    "@nuxt/ui": "^2.14.0",
+    "better-sqlite3": "^12.2.0",
+    "nuxt-overlay-hub": "file:../nuxt-overlay-hub-1.0.0.tgz"
+  }
+}
